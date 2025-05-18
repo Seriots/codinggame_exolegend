@@ -1,5 +1,11 @@
 package com.codingame.game;
 
 public enum Action {
-    UP, DOWN, STILL
+    MOVE_FORWARD,
+    MOVE_BACKWARD,
+    TURN_RIGHT,
+    TURN_LEFT,
+    NOTHING,
+    TAKE,
+    DROP
 }
