@@ -59,6 +59,9 @@ public class Referee extends AbstractReferee {
         int result = maze.generate(Constants.COLUMNS, Constants.ROWS, start_bomb_number, new Coord(robot_start_x, robot_start_y));
         maze.showMaze();
 
+        gameManager.getPlayer().sendInputLine(String.valueOf(Constants.ROWS));
+        gameManager.getPlayer().sendInputLine(String.valueOf(Constants.COLUMNS));
+        
         maze.sendMazeData(gameManager);
     }
 

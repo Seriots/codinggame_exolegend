@@ -1,7 +1,10 @@
-read eggX:int eggY:int
-gameloop
-read fishX:int fishY:int
-write STILL
+read rows:int columns:int
+loop 6
+    loop 10
+        read wall_left:bool wall_right:bool wall_top:bool wall_bottom:bool has_bomb:bool
+    endloop
+endloop
 
-OUTPUT
-UP | DOWN | STILL
+gameloop
+    read robot_x:int robot_y:int robot_angle:int robot_bombs:int
+    write MOVE_FORWARD | MOVE_BACKWARD | TURN_RIGHT | TURN_LEFT | NOTHING | TAKE | DROP
