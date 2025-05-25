@@ -1,9 +1,9 @@
 {
 	"title": {
-		"2": "One egg group",
-		"1": "Un groupe d'oeufs"
+		"2": "Get the bomb",
+		"1": "Attrape la bombe"
 	},
-	"testIn": "0 0 14 3",
+	"testIn": "0 0 false 0.0 1 false 1",
 	"isTest": "true",
 	"isValidator": "false"
 }

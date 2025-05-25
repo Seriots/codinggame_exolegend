@@ -1,9 +1,9 @@
 {
 	"title": {
-		"2": "Validator",
-		"1": "Validator"
+		"2": "Reach 10 points - 3",
+		"1": "Atteint 10 points - 3"
 	},
-	"testIn": "3 1 11 1",
-	"isTest": "false",
-	"isValidator": "true"
+	"testIn": "0 0 true 1.0 9 false 10",
+	"isTest": "true",
+	"isValidator": "false"
 }

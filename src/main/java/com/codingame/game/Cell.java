@@ -3,7 +3,9 @@ package com.codingame.game;
 import com.codingame.gameengine.module.entities.Curve;
 import com.codingame.gameengine.module.entities.GraphicEntityModule;
 import com.codingame.gameengine.module.entities.Sprite;
+import com.codingame.gameengine.module.entities.Rectangle;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -13,6 +15,7 @@ public class Cell {
 
     public boolean collectibleBomb;
     public boolean droppedBomb;
+    public int droppedBombCountdown;
     public boolean leftWall;
     public boolean rightWall;
     public boolean topWall;
@@ -22,6 +25,8 @@ public class Cell {
     public int y;
 
     private Sprite cellSprite;
+    private Rectangle coloredBackground;
+    private boolean backgroundColored = false;
 
     public Cell(GraphicEntityModule graphicEntityModule, boolean left, boolean right, boolean top, boolean bottom, int x, int y) {
         this.graphicEntityModule = graphicEntityModule;
@@ -131,6 +136,46 @@ public class Cell {
         return true;
     }
 
+    public void colorBackground(Robot robot) {
+        if (!this.backgroundColored) {
+            this.backgroundColored = true;
+            this.coloredBackground = graphicEntityModule.createRectangle()
+                    .setFillColor(0xEE1531)
+                    .setX(this.x * Constants.CELL_SIZE + Constants.CELL_OFFSET_X - Constants.CELL_SIZE / 2)
+                    .setY(this.y * Constants.CELL_SIZE + Constants.CELL_OFFSET_Y - Constants.CELL_SIZE / 2)
+                    .setZIndex(0)  // Set to lowest z-index to be behind everything
+                    .setWidth(Constants.CELL_SIZE)  // Adjust scale to cover the cell
+                    .setHeight(Constants.CELL_SIZE);  // Adjust scale to cover the cell
+
+            robot.points += 1;
+        }
+    }
+
+
+    public void dropBomb() {
+        this.droppedBomb = true;
+        this.droppedBombCountdown = Constants.DROPPED_BOMB_COUNTDOWN;
+        cellSprite = graphicEntityModule.createSprite().setImage(Constants.DROPPED_BOMB_SPRITE)
+                .setX(this.x * Constants.CELL_SIZE + Constants.CELL_OFFSET_X)
+                .setY(this.y * Constants.CELL_SIZE + Constants.CELL_OFFSET_Y)
+                .setAnchor(.5)
+                .setScale(Constants.COLLECTIBLE_BOMB_SCALE)
+                .setZIndex(1);
+    }
+
+    public boolean updateBomb(Maze maze, Robot robot) {
+        this.droppedBombCountdown -= 1;
+        if (this.droppedBombCountdown <= 0) {
+            this.droppedBomb = false;
+            cellSprite.setAlpha(0.0, Curve.EASE_OUT);
+            return true;
+        }
+        else {
+            cellSprite.setScale(Constants.COLLECTIBLE_BOMB_SCALE * (1 + ((Constants.DROPPED_BOMB_COUNTDOWN - this.droppedBombCountdown) / 10.0)), Curve.LINEAR);
+            return false;
+        }
+    }
+
     public boolean tryGetBomb() {
         if (this.collectibleBomb) {
             collectibleBomb = false;
@@ -140,7 +185,14 @@ public class Cell {
         return false;
     }
 
+    public int getWallValue() {
+        return ((this.leftWall ? 1 : 0) |
+                ((this.rightWall ? 1 : 0) << 1) |
+                ((this.topWall ? 1 : 0) << 2) |
+                ((this.bottomWall ? 1 : 0) << 3));
+    }
+
     public String toString() {
-        return collectibleBomb + " " + leftWall + " " + rightWall + " " + topWall + " " + bottomWall;
+        return leftWall + " " + rightWall + " " + topWall + " " + bottomWall + " " + collectibleBomb;
     }
 }

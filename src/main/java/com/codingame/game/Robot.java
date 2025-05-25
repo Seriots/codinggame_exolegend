@@ -8,6 +8,7 @@ public class Robot {
     public Coord position;
     public double rotation;
     public int bombCount;
+    public int points;
 
     public Sprite sprite;
 
@@ -15,6 +16,7 @@ public class Robot {
         this.bombCount = 0;
         this.position = position;
         this.rotation = rotation;
+        this.points = 0;
 
         this.sprite = graphicEntityModule.createSprite().setImage(Constants.ROBOT_SPRITE)
                 .setX(this.position.x * Constants.CELL_SIZE + Constants.CELL_OFFSET_X)
@@ -28,7 +30,6 @@ public class Robot {
     private boolean isWallInTrajectory(Action action, Maze maze) {
         Wall wall;
 
-        System.out.println("Checking wall in trajectory: " + action + " " + this.rotation);
         if (this.rotation == 0) {
             wall = (action == Action.MOVE_FORWARD ? Wall.RIGHT: Wall.LEFT);
         } else if (this.rotation == Math.PI / 2) {
@@ -75,28 +76,55 @@ public class Robot {
             if (this.rotation > Math.PI) {
                 this.rotation -= 2 * Math.PI;
             }
+            if (this.rotation == -Math.PI)
+                this.rotation = Math.PI;
         }
         else if (action == Action.TURN_LEFT) {
             this.rotation -= Math.PI / 2;
             if (this.rotation < -Math.PI) {
                 this.rotation += 2 * Math.PI;
             }
+            if (this.rotation == -Math.PI)
+                this.rotation = Math.PI;
+        }
+        else if (action == Action.DROP) {
+            if (this.bombCount > 0 && maze.dropBomb(this.position)) {
+                this.bombCount -= 1;
+            }
         }
         this.sprite.setX(this.position.x * Constants.CELL_SIZE + Constants.CELL_OFFSET_X, Curve.LINEAR)
                 .setY(this.position.y * Constants.CELL_SIZE + Constants.CELL_OFFSET_Y, Curve.LINEAR)
                 .setRotation(this.rotation, Curve.EASE_OUT);
+
         return true;
     }
 
     public boolean tryGetbomb(Maze maze) {
         if (maze.playerTryToGetBomb(this.position)) {
             this.bombCount += 1;
+            this.points += 1;
             return true;
         }
         return false;
     }
 
+    public void explode() {
+        this.sprite.setSkewX(0.5, Curve.EASE_OUT);
+        this.sprite.setSkewY(0.5, Curve.EASE_OUT);
+    }
+
     public String toString() {
-        return position.toString() + " " + rotation;
+        int rotation_direction;
+
+        if (this.rotation == 0) {
+            rotation_direction = 1;
+        } else if (this.rotation == Math.PI / 2) {
+            rotation_direction = 3;
+        } else if (this.rotation == -Math.PI / 2) {
+            rotation_direction = 2;
+        } else {
+            rotation_direction = 0;
+        }
+        return position.toString() + " " + rotation_direction + " " + bombCount;
     }
 }

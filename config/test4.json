@@ -1,9 +1,9 @@
 {
 	"title": {
-		"2": "Middle of the ocean",
-		"1": "Au milieu de l'océan"
+		"2": "Reach 10 points - 2",
+		"1": "Atteint 10 points - 2"
 	},
-	"testIn": "6 2 10 5",
+	"testIn": "0 0 true 1.0 9 false 10",
 	"isTest": "true",
 	"isValidator": "false"
 }

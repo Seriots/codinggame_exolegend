@@ -1,9 +1,9 @@
 {
 	"title": {
-		"2": "Validator",
-		"1": "Validator"
+		"2": "Get the bomb 2",
+		"1": "Attrape la bombe 2"
 	},
-	"testIn": "0 5 14 2",
-	"isTest": "false",
-	"isValidator": "true"
+	"testIn": "0 0 true 0.4 1 false 1",
+	"isTest": "true",
+	"isValidator": "false"
 }

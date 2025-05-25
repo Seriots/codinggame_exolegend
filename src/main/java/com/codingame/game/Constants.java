@@ -20,13 +20,9 @@ public class Constants {
     public static final double ROBOT_SCALE = 0.35;
     public static final double ROBOT_CRASH_SCALE_X = 0.20;
     public static final double COLLECTIBLE_BOMB_SCALE = 0.18;
-    public static final Coord ROBOT_START_POSITION = new Coord(0, 0);
+    public static final int DROPPED_BOMB_COUNTDOWN = 6;
 
-    public static final int START_BOMB_COUNT = 25;
-
-    public static final String FISH_SPRITE = "fish.png";
-    public static final String EGGS_SPRITE = "eggs.png";
-    public static final String BACKGROUND_SPRITE = "background.png";
+    public static final String BACKGROUND_SPRITE = "backgroundGreen.png";
     public static final String ROBOT_SPRITE = "robot.png";
     public static final String WALL_SPRITE = "arena-a/full.gif";
     public static final String COLLECTIBLE_BOMB_SPRITE = "collectible_bomb.png";

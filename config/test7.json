@@ -1,0 +1,9 @@
+{
+	"title": {
+		"2": "Reach 50 points",
+		"1": "Atteint 50 points"
+	},
+	"testIn": "0 0 true 1.0 18 true 50",
+	"isTest": "true",
+	"isValidator": "true"
+}

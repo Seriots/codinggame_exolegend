@@ -1,9 +1,9 @@
 {
 	"title": {
-		"2": "Close eggs",
-		"1": "Oeufs proches"
+		"2": "Reach 10 points - 1",
+		"1": "Atteint 10 points - 1"
 	},
-	"testIn": "0 5 3 2",
+	"testIn": "0 0 true 1.0 9 false 10",
 	"isTest": "true",
 	"isValidator": "false"
 }
