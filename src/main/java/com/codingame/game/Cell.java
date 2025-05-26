@@ -193,6 +193,6 @@ public class Cell {
     }
 
     public String toString() {
-        return leftWall + " " + rightWall + " " + topWall + " " + bottomWall + " " + collectibleBomb;
+        return (leftWall ? "1" : "0")  + " " + (rightWall ? "1" : "0") + " " + (topWall ? "1" : "0") + " " + (bottomWall ? "1" : "0") + " " + (collectibleBomb ? "1" : "0");
     }
 }

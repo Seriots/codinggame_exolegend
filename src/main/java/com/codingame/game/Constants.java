@@ -33,6 +33,7 @@ public class Constants {
     public static final String TURN_RIGHT_ACTION = "TURN_RIGHT";
     public static final String TURN_LEFT_ACTION = "TURN_LEFT";
     public static final String DROP_ACTION = "DROP";
+    public static final String WAIT_ACTION = "DROP";
 
-    public static final String[] ACTIONS = new String[] { MOVE_FORWARD_ACTION, MOVE_BACKWARD_ACTION, TURN_RIGHT_ACTION, TURN_LEFT_ACTION, DROP_ACTION };
+    public static final String[] ACTIONS = new String[] { MOVE_FORWARD_ACTION, MOVE_BACKWARD_ACTION, TURN_RIGHT_ACTION, TURN_LEFT_ACTION, DROP_ACTION, WAIT_ACTION };
 }

@@ -19,6 +19,7 @@ public class Referee extends AbstractReferee {
     private Maze maze;
 
     private boolean crashed = false;
+    private boolean gameLose = false;
 
     private int targetPts;
 
@@ -28,8 +29,6 @@ public class Referee extends AbstractReferee {
     public void init() {
         gameManager.setFrameDuration(500);
 
-        gameManager.setMaxTurns(1000);
-        
         graphicEntityModule.createSprite().setImage(Constants.BACKGROUND_SPRITE);
 
         pointsDisplay = graphicEntityModule.createText("POINTS: 0/0")
@@ -72,6 +71,7 @@ public class Referee extends AbstractReferee {
         gameManager.getPlayer().execute();
         if (crashed) {
             gameManager.loseGame("Your robot crashed! Try again.");
+            gameLose = true;
             return ;
         }
 
@@ -90,15 +90,18 @@ public class Referee extends AbstractReferee {
 
                 if (maze.updateAllBombs(robotPlayer)) {
                     gameManager.loseGame("The robot exploded !");
+                    gameLose = true;
+                    return;
                 }
                 this.showPoints(robotPlayer);
+
             }
 
         } catch (TimeoutException e) {
             gameManager.loseGame("Timeout!");
         }
 
-        if (robotPlayer.points >= this.targetPts) {
+        if (robotPlayer.points >= this.targetPts && !gameLose) {
             gameManager.winGame("Congrats!");
         }
     }

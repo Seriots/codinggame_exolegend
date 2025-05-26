@@ -56,8 +56,8 @@ public class Robot {
                         .setRotation(this.rotation, Curve.LINEAR);
                 return false;
             }
-            this.position.x = (int)(this.position.x + 1 * Math.cos(this.rotation));
-            this.position.y = (int)(this.position.y + 1 * Math.sin(this.rotation));
+            this.position.x = (int)(this.position.x + ((int) (Math.cos(this.rotation))));
+            this.position.y = (int)(this.position.y + ((int) (Math.sin(this.rotation))));
         }
         else if (action == Action.MOVE_BACKWARD) {
             if (this.isWallInTrajectory(action, maze)) {
@@ -68,8 +68,8 @@ public class Robot {
                         .setRotation(this.rotation, Curve.LINEAR);
                 return false;
             }
-            this.position.x = (int)(this.position.x - 1 * Math.cos(this.rotation));
-            this.position.y = (int)(this.position.y - 1 * Math.sin(this.rotation));
+            this.position.x = (int)(this.position.x - ((int) (Math.cos(this.rotation))));
+            this.position.y = (int)(this.position.y - ((int) (Math.sin(this.rotation))));
         }
         else if (action == Action.TURN_RIGHT) {
             this.rotation += Math.PI / 2;

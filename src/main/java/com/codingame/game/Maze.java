@@ -231,20 +231,39 @@ public class Maze {
         boolean[] exploded = {false};
         this.bombDroppedCells.removeIf(cell -> {
             if (cell.updateBomb(this, robot)) {
-                if ((robot.position.x == cell.x && robot.position.y >= cell.y - 1 && robot.position.y <= cell.y + 1) || (
-                        robot.position.y == cell.y && robot.position.x >= cell.x - 1 && robot.position.x <= cell.x + 1)) {
-                    exploded[0] = true;
-                    robot.explode();
-                }
                 cell.colorBackground(robot);
-                if (cell.x > 0 && !cell.leftWall)
+                if (robot.position.x == cell.x && robot.position.y == cell.y) {
+                    robot.explode();
+                    exploded[0] = true;
+                }
+                if (cell.x > 0 && !cell.leftWall) {
                     cells[cell.y][cell.x - 1].colorBackground(robot);
-                if (cell.x < Constants.COLUMNS - 1 && !cell.rightWall)
+                    if (robot.position.x == cell.x - 1 && robot.position.y == cell.y) {
+                        robot.explode();
+                        exploded[0] = true;
+                    }
+                }
+                if (cell.x < Constants.COLUMNS - 1 && !cell.rightWall) {
                     cells[cell.y][cell.x + 1].colorBackground(robot);
-                if (cell.y > 0 && !cell.topWall)
+                    if (robot.position.x == cell.x + 1 && robot.position.y == cell.y) {
+                        robot.explode();
+                        exploded[0] = true;
+                    }
+                }
+                if (cell.y > 0 && !cell.topWall) {
                     cells[cell.y - 1][cell.x].colorBackground(robot);
-                if (cell.y < Constants.ROWS - 1 && !cell.bottomWall)
+                    if (robot.position.x == cell.x && robot.position.y == cell.y - 1) {
+                        robot.explode();
+                        exploded[0] = true;
+                    }
+                }
+                if (cell.y < Constants.ROWS - 1 && !cell.bottomWall) {
                     cells[cell.y + 1][cell.x].colorBackground(robot);
+                    if (robot.position.x == cell.x && robot.position.y == cell.y + 1) {
+                        robot.explode();
+                        exploded[0] = true;
+                    }
+                }
                 return true;
             }
             return false;
