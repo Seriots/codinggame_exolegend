@@ -4,25 +4,57 @@
     <span class="question-statement">
       Dans ce jeu, vous contrôlez un robot dans un labyrinthe. L'objectif est de collecter des bombes et de les utiliser pour peindre le sol.
       <br>
-      Le labyrinthe se compose de <strong>6 lignes</strong> et <strong>10 colonnes</strong>. Vous devez guider votre robot pour qu’il récupère des bombes, les dépose dans le labyrinthe, puis fuie pour éviter l’explosion.
-      <br>
-      Pour gagner des points, collectez un maximum de bombes et peignez la plus grande zone possible du labyrinthe.
+      Le labyrinthe se compose de <strong>6 lignes</strong> et <strong>10 colonnes</strong>. Vous devez guider votre robot pour qu’il récupère des bombes, les dépose dans le labyrinthe, puis fuie pour éviter l’explosion. Lorsque une bombe explose, elle colorie le sol sous elle et 1 cases de chaque côté en forme de croix dans chaque direction non bloqué par un mur.<br>
+      Chaque bombe collecté rapporte <strong>1 points</strong> et chaque case coloré rapporte aussi <strong>1 points</strong>.<br><br>
+      Pour l'emporter, il faut atteindre le nombre de points requis, écrit en haut à gauche de l'écran et sans rentrer dans un mur ou se faire exploser sois même.
+
+
     </span>
   </div>
+  <div class="statement-victory-conditions">
+        <div class="icon victory"></div>
+        <div class="blk">
+            <div class="title">Conditions de Victoire</div>
+            <div class="text">
+                <ul style="padding-bottom:0"><li>
+                        Vous atteignez le nombre de points requis.
+                    </li></ul>
+            </div>
+        </div>
+    </div>
+  <div class="statement-lose-conditions">
+        <div class="icon lose"></div>
+        <div class="blk">
+            <div class="title">Conditions de Défaite</div>
+            <div class="text">
+                <ul style="padding-bottom:0"><li>
+                        Le robot se crash dans un mur.
+                    </li><li>
+                        Le robot est pris dans l'explosion d'une bombe.
+                    </li><li>
+                        Vous n'atteignez pas les points en
+                        <const>200</const> turns.
+                    </li><li>
+                        Vous ne répondez pas dans les temps ou la commande est inconnue.
+                    </li></ul>
+            </div>
+        </div>
+    </div>
 
   <div class="statement-section statement-protocol">
     <div class="blk">
       <div class="title">Entrée d'initialisation</div>
       <div class="question-statement-input">
-        - Deux entiers : <var>rows</var> et <var>columns</var>, représentant respectivement le nombre de lignes et de colonnes du labyrinthe.<br>
-        - Ensuite, une ligne <strong>par cellule</strong> du labyrinthe, contenant chacune <strong>5 valeurs</strong> : <var>west</var>, <var>east</var>, <var>north</var>, <var>south</var>, et <var>hasBomb</var>. Ces valeurs indiquent la présence de murs (1 ou 0) dans chaque direction et si une bombe est présente dans la cellule (1 ou 0).
+        - <span class="statement-lineno">Ligne 1</span>: Un entier : <var>rows</var>, représentant le nombre de lignes du labyrinthe.<br>
+        - <span class="statement-lineno">Ligne 2</span>: Un entier : <var>columns</var>, représentant le nombre de colonnes du labyrinthe.<br>
+        - Ensuite, une ligne <strong>par cellule</strong> du labyrinthe, contenant chacune <strong>5 booléen séparé par un espace</strong> : <var>west</var>, <var>east</var>, <var>north</var>, <var>south</var>, et <var>hasBomb</var>.<br><br> Ces valeurs indiquent la présence de murs dans chaque direction et si une bombe est présente dans la cellule.
       </div>
     </div>
 
     <div class="blk">
       <div class="title">Entrée pour un tour de jeu</div>
       <div class="question-statement-input">
-        - Quatre entiers : <var>robotX</var>, <var>robotY</var>, <var>robotA</var> et <var>robotBombs</var>.<br>
+        - <span class="statement-lineno">Ligne 1</span>: 4 entiers séparé par un espace : <var>robotX</var>, <var>robotY</var>, <var>robotA</var> et <var>robotBombs</var>.<br><br>
         Ces valeurs représentent la position actuelle du robot, son orientation et le nombre de bombes qu’il transporte.
         <br><br>
         L’orientation <var>robotA</var> est définie comme suit :<br>
@@ -40,12 +72,12 @@
       <div class="question-statement-output">
         Affichez l'une des actions suivantes :
         <ul>
-          <li><var>MOVE_FORWARD</var> : Fait avancer le robot d’une cellule. S’il rencontre un mur, il s’écrasera.</li>
-          <li><var>MOVE_BACKWARD</var> : Fait reculer le robot d’une cellule. S’il rencontre un mur, il s’écrasera.</li>
-          <li><var>TURN_LEFT</var> : Fait pivoter le robot de 90° vers la gauche (sens antihoraire).</li>
-          <li><var>TURN_RIGHT</var> : Fait pivoter le robot de 90° vers la droite (sens horaire).</li>
-          <li><var>DROP</var> : Dépose une bombe dans la cellule actuelle, si le robot en possède au moins une et qu’aucune bombe n’est déjà présente dans cette cellule.</li>
-          <li><var>WAIT</var> : Attend le prochain tour.</li>
+          <li><action>MOVE_FORWARD</action> : Fait avancer le robot d’une cellule. S’il rencontre un mur, il s’écrasera.</li>
+          <li><action>MOVE_BACKWARD</action> : Fait reculer le robot d’une cellule. S’il rencontre un mur, il s’écrasera.</li>
+          <li><action>TURN_LEFT</action> : Fait pivoter le robot de 90° vers la gauche (sens antihoraire).</li>
+          <li><action>TURN_RIGHT</action> : Fait pivoter le robot de 90° vers la droite (sens horaire).</li>
+          <li><action>DROP</action> : Dépose une bombe dans la cellule actuelle, si le robot en possède au moins une et qu’aucune bombe n’est déjà présente dans cette cellule.</li>
+          <li><action>WAIT</action> : Attend le prochain tour.</li>
         </ul>
       </div>
     </div>
@@ -54,11 +86,10 @@
       <div class="title">Contraintes</div>
       <div class="question-statement-constraints">
         <ul>
-          <li><var>rows = 6</var></li>
-          <li><var>columns = 10</var></li>
           <li><var>0 ≤ robotX &lt; 10</var></li>
           <li><var>0 ≤ robotY &lt; 6</var></li>
           <li><var>0 ≤ robotA ≤ 3</var></li>
+          <li><var>0 ≤ robotBombs</var></li>
         </ul>
       </div>
     </div>
