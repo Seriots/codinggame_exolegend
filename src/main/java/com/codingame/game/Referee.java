@@ -32,7 +32,7 @@ public class Referee extends AbstractReferee {
         
         graphicEntityModule.createSprite().setImage(Constants.BACKGROUND_SPRITE);
 
-        pointsDisplay = graphicEntityModule.createText("POINTS: 0")
+        pointsDisplay = graphicEntityModule.createText("POINTS: 0/0")
                 .setX(25)  // Position from left
                 .setY(0)  // Position from top
                 .setZIndex(20)  // Make sure it's above other elements
@@ -104,7 +104,7 @@ public class Referee extends AbstractReferee {
     }
 
     private void showPoints(Robot robot) {
-        pointsDisplay.setText("POINTS: " + robot.points);
+        pointsDisplay.setText("POINTS: " + robot.points + "/" + this.targetPts);
     }
 
     private String checkOutput(List<String> outputs) {

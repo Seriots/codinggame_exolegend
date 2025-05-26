@@ -50,7 +50,10 @@ public class Solution {
         Solution solution = new Solution();
         Scanner scanner = new Scanner(System.in);
 
-        boolean[][][] cases = new boolean[6][10][5];
+        int rows = Integer.parseInt(scanner.nextLine());
+        int columns = Integer.parseInt(scanner.nextLine());
+
+        boolean[][][] cases = new boolean[rows][columns][5];
         int robot_x, robot_y, robot_a, robot_bombs;
 
         for (int i = 0; i < 6; i++) {

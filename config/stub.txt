@@ -1,10 +1,24 @@
-read rows:int columns:int
-loop 6
-    loop 10
-        read wall_left:bool wall_right:bool wall_top:bool wall_bottom:bool has_bomb:bool
-    endloop
-endloop
+read rows:int
+read columns:int
+
+loop rows
+  loop columns
+    read west:bool east:bool north:bool south:bool hasBomb:bool
 
 gameloop
-    read robot_x:int robot_y:int robot_angle:int robot_bombs:int
-    write MOVE_FORWARD | MOVE_BACKWARD | TURN_RIGHT | TURN_LEFT | NOTHING | TAKE | DROP
+read robotX:int robotY:int robotA:int robotBombs:int
+
+STATEMENT
+Read a grid layout of cells with boolean flags for directions and goal presence. Each turn, read the robot's current position, orientation, and number of bombs.
+
+INPUT
+rows: number of rows in the grid
+columns: number of columns in the grid
+north, south, east, west: whether movement is possible in each direction from the cell
+robotX: the robot's current X coordinate
+robotY: the robot's current Y coordinate
+robotA: the robot's orientation
+robotBombs: the number of bombs the robot has
+
+OUTPUT
+MOVE_FORWARD | TURN_LEFT | TURN_RIGHT | DROP_BOMB | WAIT

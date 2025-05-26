@@ -1,21 +1,43 @@
-<div class="statement-body">
-<div class="statement-section statement-goal">
-   <h2><span class="icon icon-goal">&nbsp;</span><span>Goal </span></h2>
-   <span class="question-statement">In this game, you control a mother fish trying to get back to her eggs. She's so worried she keeps swimming forward, but you can help her to decide whether she must go <const>UP</const>, <const>DOWN</const> or stay <const>STILL</const> on the same height.<br><br>The game is played on a grid of <strong>15</strong> cells wide and <strong>6</strong> cells high. The cell on the top right corner's coordinate is (0, 0). Each turn, the fish goes one cell to the <strong>right</strong>. To succeed your mission, you must lead the fish to her eggs.</span>
+<div class="statement-body"> <div class="statement-section statement-goal"> <h2><span class="icon icon-goal">&nbsp;</span><span>Goal</span></h2> <span class="question-statement"> In this game, you control a robot in a maze. The goal is to collect bombs and use them to paint the ground. <br> The maze consists of <strong>6 rows</strong> and <strong>10 columns</strong>. You must guide your robot to collect bombs, drop them in the maze, and run to avoid the explosion. <br> To earn points, collect as many bombs as possible and paint the largest possible area of the maze. </span> </div> <div class="statement-section statement-protocol"> <div class="blk"> <div class="title">Initialization Input</div> <div class="question-statement-input"> - Two integers: <var>rows</var> and <var>columns</var>, representing the number of rows and columns in the maze.<br> - Then, one line <strong>per cell</strong> in the maze, each containing <strong>5 values</strong>: <var>west</var>, <var>east</var>, <var>north</var>, <var>south</var>, and <var>hasBomb</var>. These represent the presence of walls (1 or 0) in each direction and whether a bomb is present in that cell (1 or 0). </div> </div><div class="blk">
+  <div class="title">Input for a Game Round</div>
+  <div class="question-statement-input">
+    - Four integers: <var>robotX</var>, <var>robotY</var>, <var>robotA</var>, and <var>robotBombs</var>.<br>
+    These represent the robot's current position, orientation, and the number of bombs it is carrying.
+    <br><br>
+    The orientation <var>robotA</var> is defined as:<br>
+    <ul>
+      <li><code>0</code> &rarr; facing WEST</li>
+      <li><code>1</code> &rarr; facing EAST</li>
+      <li><code>2</code> &rarr; facing NORTH</li>
+      <li><code>3</code> &rarr; facing SOUTH</li>
+    </ul>
+  </div>
 </div>
-<div class="statement-section statement-protocol">
-   <div class="blk">
-      <div class="title">Initialization input</div>
-      <div class="question-statement-input">2 integers <var>eggX</var> and <var>eggY</var> representing the position of the group of eggs.</div>
-      <div class="title">Input for a game round</div>
-      <div class="question-statement-input">2 integers <var>fishX</var> and <var>fishY</var> representing the position of the fish.</div>
-   </div>
-   <div class="blk">
-      <div class="title">Output</div>
-      <div class="question-statement-output">One action among these:<br>- <const>UP</const>: Makes the fish go one cell higher.<br>- <const>DOWN</const>: Makes the fish go one cell lower.<br>- <const>STILL</const>: Does not change the fish's height.</div>
-   </div>
-   <div class="blk">
-      <div class="title">Constraints</div>
-      <div class="question-statement-constraints">0 &lt; <var>eggX</var> &lt; 15<br>0 &lt; <var>eggY</var> &lt; 6<br>0 &lt; <var>fishX</var> &lt; 15<br>0 &lt; <var>fishY</var> &lt; 6</div>
-   </div>
-</div></div>
+
+<div class="blk">
+  <div class="title">Output</div>
+  <div class="question-statement-output">
+    Output one of the following actions:
+    <ul>
+      <li><var>MOVE_FORWARD</var>: Moves the robot one cell forward. If it moves into a wall, it will crash.</li>
+      <li><var>MOVE_BACKWARD</var>: Moves the robot one cell backward. If it moves into a wall, it will crash.</li>
+      <li><var>TURN_LEFT</var>: Rotates the robot 90° to the left (counterclockwise).</li>
+      <li><var>TURN_RIGHT</var>: Rotates the robot 90° to the right (clockwise).</li>
+      <li><var>DROP</var>: Drops a bomb in the current cell, if the robot has at least one bomb and there is no bomb already present in that cell.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="blk">
+  <div class="title">Constraints</div>
+  <div class="question-statement-constraints">
+    <ul>
+      <li><var>rows = 6</var></li>
+      <li><var>columns = 10</var></li>
+      <li><var>0 ≤ robotX &lt; 10</var></li>
+      <li><var>0 ≤ robotY &lt; 6</var></li>
+      <li><var>0 ≤ robotA ≤ 3</var></li>
+    </ul>
+  </div>
+</div>
+</div> </div>
